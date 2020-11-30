@@ -53,6 +53,7 @@ namespace EventBusRabbitMQ
             }
         }
 
+        //LD to use queue related operations
         public IModel CreateModel()
         {
             if (!IsConnected)

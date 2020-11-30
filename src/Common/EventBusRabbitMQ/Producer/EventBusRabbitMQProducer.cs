@@ -10,6 +10,7 @@ namespace EventBusRabbitMQ.Producer
     {
         private readonly IRabbitMQConnection _connection;
 
+        //LD get's the connection reference configured in startup
         public EventBusRabbitMQProducer(IRabbitMQConnection connection)
         {
             _connection = connection ?? throw new ArgumentNullException(nameof(connection));
@@ -29,6 +30,7 @@ namespace EventBusRabbitMQ.Producer
 
                 channel.ConfirmSelect();
                 channel.BasicPublish(exchange: "", routingKey: queueName, mandatory: true, basicProperties: properties, body: body);
+
                 channel.WaitForConfirmsOrDie();
 
                 channel.BasicAcks += (sender, eventArgs) =>

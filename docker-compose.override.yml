@@ -5,7 +5,8 @@ services:
         container_name: catalogdb
         restart: always
         volumes:
-            - ./data:/data/db #- ${WEBAPP_STORAGE_HOME}/site:/data/db
+            - ./data:/data/db 
+            #- ${WEBAPP_STORAGE_HOME}/site:/data/db
         ports:
             - "27017:27017"
 
@@ -28,7 +29,7 @@ services:
         restart: always
         ports:
             - "5672:5672"
-            - "15672:15672"
+            - "15672:15672" 
 
     catalog.api:
         container_name: catalogapi
@@ -38,8 +39,10 @@ services:
         depends_on:
             - catalogdb
         volumes:
-            - ./home/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-            - ./home/.aspnet/https:/root/.aspnet/https/
+            #- ./home/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+            #- ./home/.aspnet/https:/root/.aspnet/https/
+            - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets 
+            - ${HOME}/.aspnet/https:/root/.aspnet/https/ 
         ports:
             - "8000:80"
 
@@ -53,8 +56,10 @@ services:
             - basketdb
             - rabbitmq
         volumes:
-            - ./home/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-            - ./home/.aspnet/https:/root/.aspnet/https/
+            #- ./home/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+            #- ./home/.aspnet/https:/root/.aspnet/https/
+            - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets 
+            - ${HOME}/.aspnet/https:/root/.aspnet/https/ 
         ports:
             - "8001:80"
 
@@ -69,8 +74,10 @@ services:
             - orderdb
             - rabbitmq
         volumes:
-            - ./home/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-            - ./home/.aspnet/https:/root/.aspnet/https/
+            #- ./home/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+            #- ./home/.aspnet/https:/root/.aspnet/https/
+            - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+            - ${HOME}/.aspnet/https:/root/.aspnet/https/  
         ports:
             - "8002:80"
 
@@ -83,8 +90,10 @@ services:
             - basket.api
             - ordering.api
         volumes:
-            - ./home/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-            - ./home/.aspnet/https:/root/.aspnet/https/
+            #- ./home/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+            #- ./home/.aspnet/https:/root/.aspnet/https/
+            - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets 
+            - ${HOME}/.aspnet/https:/root/.aspnet/https/
         ports:
             - "7000:80"
 

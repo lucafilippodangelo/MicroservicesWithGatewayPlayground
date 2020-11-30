@@ -5,7 +5,7 @@ services:
         image: mongo
 
     basketdb:
-        image: redis
+        image: redis #LD redis official image
 
     orderdb:
         image: mcr.microsoft.com/mssql/server
