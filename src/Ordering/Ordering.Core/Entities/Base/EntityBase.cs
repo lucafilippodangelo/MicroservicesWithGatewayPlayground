@@ -6,10 +6,15 @@ namespace Ordering.Core.Entities.Base
 {
     public abstract class EntityBase<TId> : IEntityBase<TId>
     {
-        public virtual TId Id { get; protected set; }
+        //LD we can override in implementing classes 
+        // we can set this key attribite
+
+        public virtual TId Id { get; protected set; } 
 
         int? _requestedHashCode;
 
+
+        //LD IsTransient it checks if an ID = 0. If thats the case the object is Transient and not Persisted yet to database
         public bool IsTransient()
         {
             return Id.Equals(default(TId));
@@ -59,5 +64,6 @@ namespace Ordering.Core.Entities.Base
         {
             return !(left == right);
         }
+
     }
 }
