@@ -78,5 +78,6 @@ namespace EventBusRabbitMQ
                 Console.WriteLine(ex.ToString());
             }
         }
+
     }
 }

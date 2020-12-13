@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace Ordering.Application.Handlers
 {
+    //LD "GetOrderByUserNameQuery" will be triggered from the API project when the user will send the request to the action 
+    // "GetOrdersByUserName" of "OrderController"
     public class GetOrderByUserNameHandler : IRequestHandler<GetOrderByUserNameQuery, IEnumerable<OrderResponse>>
     {
         private readonly IOrderRepository _orderRepository;
