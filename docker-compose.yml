@@ -42,3 +42,10 @@ services:
         build:
             context: .
             dockerfile: src/WebApp/AspnetRunBasics/Dockerfile
+
+    asecondconsumerld:
+        image: ${DOCKER_REGISTRY-}asecondconsumerld
+        build:
+            context: .
+            dockerfile: src/ASecondConsumerLd/Dockerfile
+

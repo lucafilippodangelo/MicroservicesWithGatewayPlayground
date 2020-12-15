@@ -21,6 +21,7 @@ namespace EventBusRabbitMQ.Producer
             using (var channel = _connection.CreateModel())
             {
                 channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                
                 var message = JsonConvert.SerializeObject(publishModel);
                 var body = Encoding.UTF8.GetBytes(message);
 

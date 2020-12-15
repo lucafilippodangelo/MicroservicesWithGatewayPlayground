@@ -112,3 +112,13 @@ services:
             - ./appdata/ASP.NET/Https:/root/.aspnet/https:ro
         ports:
             - "8003:80"
+
+    asecondconsumerld:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=https://+:443;http://+:80
+        ports:
+            - "80"
+            - "443"
+        volumes:
+            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
