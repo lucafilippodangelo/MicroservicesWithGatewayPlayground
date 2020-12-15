@@ -38,7 +38,7 @@ namespace Ordering.API.RabbitMQ
             //Create event when something receive
             consumer.Received += ReceivedEvent;
 
-            channel.BasicConsume(queue: EventBusConstants.BasketCheckoutQueue, autoAck: true, consumer: consumer);
+            channel.BasicConsume(queue: EventBusConstants.BasketCheckoutQueue, autoAck:true, consumer: consumer);
         }
 
         private async void ReceivedEvent(object sender, BasicDeliverEventArgs e)

@@ -19,6 +19,7 @@ namespace APIGateway
                 })
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
+                //LD we are saying that we would like to read "ocelot.json" when the application starts.
                 config.AddJsonFile($"ocelot.json");
                 
                 // for local test use below one, multi env json file not worked

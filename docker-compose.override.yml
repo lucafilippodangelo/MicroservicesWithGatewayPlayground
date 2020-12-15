@@ -35,7 +35,7 @@ services:
         container_name: catalogapi
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "CatalogDatabaseSettings:ConnectionString=mongodb://catalogdb:27017" #we override "localhost"(where the image declare to run) with "catalogdb" that is the container name
+            - "CatalogDatabaseSettings:ConnectionString=mongodb://catalogdb:27017" #LD we override "localhost"(where the image declare to run) with "catalogdb" that is the container name
         depends_on:
             - catalogdb
         volumes:
@@ -50,7 +50,7 @@ services:
         container_name: basketapi
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "ConnectionStrings:Redis=basketdb:6379"
+            - "ConnectionStrings:Redis=basketdb:6379" #LD replace "localhost" with the contained name "basketdb"
             - "EventBus:HostName=rabbitmq" #we do point to the container "rabbitMQ"
         depends_on:
             - basketdb

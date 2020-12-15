@@ -88,6 +88,8 @@ namespace Ordering.API
                 return new RabbitMQConnection(factory);
             });
 
+            //LD Note, this will not work if repositories are not declared before "AutoMaper"
+            // in this "ConfigureServices" method
             services.AddSingleton<EventBusRabbitMQConsumer>();
 
             #endregion

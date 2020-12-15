@@ -1,8 +1,13 @@
+//LD The DownstreamPathTemplate, DownstreamScheme and DownstreamHostAndPorts 
+// define the URL that a request will be forwarded to.
+
+//LD The UpstreamPathTemplate is the URL that Ocelot will use to identify which 
+// DownstreamPathTemplate to use for a given request.
 {
   "Routes": [
     //Catalog API
     {
-      "DownstreamPathTemplate": "/api/v1/Catalog",
+      "DownstreamPathTemplate": "/api/v1/Catalog", //LD routing of the controller
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {

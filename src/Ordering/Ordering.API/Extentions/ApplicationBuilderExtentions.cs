@@ -10,9 +10,10 @@ namespace Ordering.API.Extentions
         public static EventBusRabbitMQConsumer Listener { get; set; }
 
 
-        //LD called at startup 
+        //LD "UseRabbitListener" called at startup 
         public static IApplicationBuilder UseRabbitListener(this IApplicationBuilder app)
         {
+            //LD "app.ApplicationServices.GetService" calls the built in dependency injection
             Listener = app.ApplicationServices.GetService<EventBusRabbitMQConsumer>();
             var life = app.ApplicationServices.GetService<IHostApplicationLifetime>();
 
