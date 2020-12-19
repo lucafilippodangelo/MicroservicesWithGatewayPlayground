@@ -1,5 +1,6 @@
 ﻿using EventBusRabbitMQ;
 using EventBusRabbitMQ.Common;
+using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -11,10 +12,12 @@ namespace ASecondConsumerLd
     public class EventBusRabbitMQConsumer
     {
         private readonly IRabbitMQConnection _connection;
-        
-        public EventBusRabbitMQConsumer(IRabbitMQConnection connection)
+        public IConfiguration Configuration { get; set; }
+
+        public EventBusRabbitMQConsumer(IRabbitMQConnection connection, IConfiguration configuration)
         {
             _connection = connection ?? throw new ArgumentNullException(nameof(connection));
+            Configuration = configuration;
         }
 
         public void Consume()
@@ -34,8 +37,11 @@ namespace ASecondConsumerLd
         {
             if (e.RoutingKey == EventBusConstants.SecondConsumerQueue)
             {
-                writeFile();
-                Console.WriteLine("SECOND CONSUMER CONSUMED an event from the queue " + EventBusConstants.SecondConsumerQueue + " ->" + DateTimeOffset.UtcNow);
+                //writeFile();
+                var content = "SECOND CONSUMER CONSUMED an event from the queue " + EventBusConstants.SecondConsumerQueue + " ->" + DateTimeOffset.UtcNow;
+                Console.WriteLine(content);
+                Configuration["LdStaticSection:aStaticVariableContent"] = content;
+
             }
         }
 

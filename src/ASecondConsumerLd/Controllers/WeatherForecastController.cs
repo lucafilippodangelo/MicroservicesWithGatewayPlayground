@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,19 @@ namespace ASecondConsumerLd.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        public IConfiguration Configuration { get; set; }
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            Configuration = configuration;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public string Get()//public IEnumerable<WeatherForecast> Get()
         {
+            return Configuration["LdStaticSection:aStaticVariableContent"];
+            /*
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -34,6 +39,7 @@ namespace ASecondConsumerLd.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+            */
         }
     }
 }
