@@ -9,6 +9,7 @@ using Ordering.Core.Repositories;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
+using System.IO;
 using System.Text;
 
 namespace Ordering.API.RabbitMQ
@@ -51,6 +52,9 @@ namespace Ordering.API.RabbitMQ
                 // EXECUTION : Call Internal Checkout Operation
                 var command = _mapper.Map<CheckoutOrderCommand>(basketCheckoutEvent);
                 var result = await _mediator.Send(command);
+
+                //writeFile();
+                Console.WriteLine("ORDERING API CONSUMED an event from the queue "+ EventBusConstants.BasketCheckoutQueue + " ->" + DateTimeOffset.UtcNow);
             }
         }
 
@@ -58,5 +62,37 @@ namespace Ordering.API.RabbitMQ
         {
             _connection.Dispose();
         }
+
+        public void writeFile()
+        {
+            string path = @"C:\Users\ldazu\Desktop\MyTest.txt";
+
+            try
+            {
+                // Create the file, or overwrite if the file exists.
+                using (FileStream fs = File.OpenWrite(path))
+                {
+                    byte[] info = new UTF8Encoding(true).GetBytes("ORDERING API consumed an event ->" + DateTimeOffset.UtcNow);
+                    // Add some information to the file.
+                    fs.Write(info, 0, info.Length);
+                }
+
+                // Open the stream and read it back.
+                using (StreamReader sr = File.OpenText(path))
+                {
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(s);
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
     }
 }

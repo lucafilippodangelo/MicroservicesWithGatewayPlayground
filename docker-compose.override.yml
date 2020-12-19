@@ -114,11 +114,14 @@ services:
             - "8003:80"
 
     asecondconsumerld:
+        container_name: asecondconsumerld
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - ASPNETCORE_URLS=https://+:443;http://+:80
+            #- ASPNETCORE_URLS=https://+:443;http://+:80
+            - "EventBus:HostName=rabbitmq"
+        depends_on:
+            - rabbitmq
         ports:
-            - "80"
-            - "443"
+            - "8004:80"
         volumes:
             - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
